@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require(`body-parser`);
 const fs = require(`fs`);
+const path = require(`path`);
 
 const serve = require(`./server/serveHTML`);
 const pad = require(`./server/HelperFunctions/Pad`);
@@ -15,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (settings.debug) {
   app.use(logger);
 }
-app.use(express.static(`${__dirname}/public/`));
+app.use(express.static(path.join(__dirname, `/public/`)));
 
 app.get(`/`, (req, res) => serve(res, `/`));
 
