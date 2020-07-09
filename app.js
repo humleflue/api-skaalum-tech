@@ -16,9 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (settings.debug) {
   app.use(mw.logger);
 }
-app.use(`/img`, express.static(path.join(__dirname, `public/img`)));
-app.use(`/js`, express.static(path.join(__dirname, `public/js`)));
-app.use(`/css`, express.static(path.join(__dirname, `public/css`)));
+app.use(express.static(`public`));
 
 // Routing
 app.get(`/`, (req, res) => serve(res, `/`));
