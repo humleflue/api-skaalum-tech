@@ -7,7 +7,7 @@ const fs = require(`fs`);
 const serve = require(`./server/serveHTML`);
 const mw = require(`./server/middleWare`);
 
-const settings = JSON.parse(fs.readFileSync(`serverSettings.json`));
+const settings = JSON.parse(fs.readFileSync(`server_settings.json`));
 
 // Middleware
 app.use(bodyParser.json());
@@ -18,6 +18,6 @@ if (settings.debug) {
 app.use(express.static(`public`));
 
 // Routing
-app.get(`/`, (req, res) => serve(res, `/`));
+app.get(`/`, (req, res) => serve(req, res, `/`));
 
 app.listen(port, () => console.log(`skaalum-tech listening at http://localhost:${port}`));

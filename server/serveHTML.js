@@ -1,6 +1,6 @@
 const path = require(`path`);
 
-module.exports = (res, route) => {
+module.exports = (req, res, route) => {
   const root = path.join(__dirname, `../`);
 
   switch (route) {
