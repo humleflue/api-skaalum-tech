@@ -1,6 +1,6 @@
 const fs = require(`fs`);
 
-const pad = require(`./HelperFunctions/Pad`);
+const pad = require(`./helper_functions/Pad`);
 
 class MiddleWare {
   logger(req, res, next) {
