@@ -1,7 +1,7 @@
 {
   "name": "skaalum-tech",
   "version": "1.0.0",
-  "description": "Lasses legelplads",
+  "description": "Lasses legeplads",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",

@@ -7,10 +7,6 @@ const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server_setting
 
 module.exports = (express, app) => {
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    if (settings.debug) {
-      console.error(err);
-    }
-
     const response = {
       message: `500: Internal Server Error.`,
       status: 500,
@@ -25,7 +21,22 @@ module.exports = (express, app) => {
         break;
       default: break;
     }
+    if (settings.debug) {
+      console.error(err);
+      if (errorType !== `SAMPLE_ERROR`) {
+        logError(err);
+      }
+    }
 
     res.status(response.status).json(response);
   });
 };
+
+function logError(err) {
+  const now = new Date();
+  fs.appendFile(path.join(__dirname, `logs`, `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}_errors.log`), `${err}\n`, (error) => {
+    if (error) {
+      throw error;
+    }
+  });
+}
