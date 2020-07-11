@@ -1,9 +1,9 @@
 const path = require(`path`);
 
 module.exports = (express, app) => {
-  const root = path.join(__dirname, `..`); // root dir is the parent of the "server"-folder
+  const publicDir = path.join(__dirname, `..`, `public`);
 
-  app.get(`/`, (req, res) => res.sendFile(path.join(root, `/public/index.html`)));
+  app.get(`/`, (req, res) => res.sendFile(path.join(publicDir, `index.html`)));
 
   // For testing error handling
   app.get(`/error`, () => {

@@ -1,8 +1,9 @@
 /* eslint no-console: 0 */
 
 const fs = require(`fs`);
+const path = require(`path`);
 
-const settings = JSON.parse(fs.readFileSync(`server_settings.json`));
+const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server_settings.json`)));
 
 module.exports = (express, app) => {
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

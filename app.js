@@ -1,18 +1,19 @@
 /* eslint no-console: 0 */
 
+// External modules
 const express = require(`express`);
 const app = express();
 const port = 3000;
 const bodyParser = require(`body-parser`);
 const fs = require(`fs`);
-// const path = require(`path`);
+const path = require(`path`);
 
+// Internal modules
 const handleRoutes = require(`./server/routing`);
 const handleErrors = require(`./server/error_handler`);
+const mw = require(`./server/middleware`);
 
-const mw = require(`./server/middle_ware`);
-
-const settings = JSON.parse(fs.readFileSync(`server_settings.json`));
+const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `server_settings.json`)));
 
 // Middleware
 app.use(bodyParser.json());
@@ -22,12 +23,8 @@ if (settings.debug) {
 }
 app.use(express.static(`public`));
 
-// Handles all routing
 handleRoutes(express, app);
-
-// Handles all possible errors and delivers a result to the user
 handleErrors(express, app);
-
 // Handles non-existing URL-requests. Has to be the last line before app.listen.
 app.use((req, res) => res.status(404).send(`Sorry, the resource doesn't exist`));
 
