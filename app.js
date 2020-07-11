@@ -3,7 +3,6 @@ const app = express();
 const port = 3000;
 const bodyParser = require(`body-parser`);
 const fs = require(`fs`);
-const path = require(`path`);
 
 const serve = require(`./server/serveHTML`);
 const mw = require(`./server/middleWare`);
@@ -12,7 +11,7 @@ const settings = JSON.parse(fs.readFileSync(`serverSettings.json`));
 
 // Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 if (settings.debug) {
   app.use(mw.logger);
 }
