@@ -26,6 +26,6 @@ app.use(express.static(`public`));
 handleRoutes(express, app);
 handleErrors(express, app);
 // Handles non-existing URL-requests. Has to be the last line before app.listen.
-app.use((req, res) => res.status(404).send(`Sorry, the resource doesn't exist`));
+app.use((req, res) => res.status(404).send(`404: Sorry, that resource doesn't exist`));
 
 app.listen(port, () => console.log(`skaalum-tech listening at http://localhost:${port}`));
