@@ -1,4 +1,5 @@
 const fs = require(`fs`);
+const path = require(`path`);
 
 const pad = require(`./helper_functions/pad`);
 
@@ -11,7 +12,7 @@ class MiddleWare {
     const time      = `${pad(now.getHours(), -2, `0`)}:${pad(now.getMinutes(), -2, `0`)}:${pad(now.getSeconds(), -2, `0`)}`;
     const log       = `${date} ${time} - GOT ${reqMethod}: ${reqUrl}`;
     console.log(log);
-    fs.appendFile(`${__dirname}/logs/${now.getFullYear()}-${now.getMonth()}-${now.getDate()}.log`, `${log}\n`, (err) => {
+    fs.appendFile(path.join(__dirname, `/logs/${now.getFullYear()}-${now.getMonth()}-${now.getDate()}.log`), `${log}\n`, (err) => {
       if (err) {
         throw err;
       }
