@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 const express = require(`express`);
 const app = express();
 const port = 3000;
@@ -6,6 +8,8 @@ const fs = require(`fs`);
 // const path = require(`path`);
 
 const handleRoutes = require(`./server/routing`);
+const handleErrors = require(`./server/error_handler`);
+
 const mw = require(`./server/middle_ware`);
 
 const settings = JSON.parse(fs.readFileSync(`server_settings.json`));
@@ -20,6 +24,9 @@ app.use(express.static(`public`));
 
 // Handles all routing
 handleRoutes(express, app);
+
+// Handles all possible errors and delivers a result to the user
+handleErrors(express, app);
 
 // Handles non-existing URL-requests. Has to be the last line before app.listen.
 app.use((req, res) => res.status(404).send(`Sorry, the resource doesn't exist`));
