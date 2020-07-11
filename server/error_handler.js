@@ -10,21 +10,21 @@ module.exports = (express, app) => {
       console.error(err);
     }
 
-    let response = {};
-    let statusCode = 500;
+    const response = {
+      message: `500: Internal Server Error.`,
+      status: 500,
+    };
+
     // The RegEx reads everything until the first colon (or whitespace) because SQL-error-messages looks like this: "ERROR_CODE: Bla bla.... "
     const errorType = err.code || /^[^:^ ]+/.exec(err.message)[0];
-
     switch (errorType) {
       case `SAMPLE_ERROR`:
-        response.msg = `If this message shows, it means that error handling is working correctly.`;
-        statusCode = 200;
+        response.message = `If this message shows, it means that error handling is working correctly.`;
+        response.status = 200;
         break;
-      default:
-        response = `500: Internal Server Error.`;
-        break;
+      default: break;
     }
 
-    res.status(statusCode).json(response);
+    res.status(response.status).json(response);
   });
 };
