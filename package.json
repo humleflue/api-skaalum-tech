@@ -6,7 +6,11 @@
   "scripts": {
     "start": "nodemon app.js",
     "test": "node_modules\\.bin\\tape tests/**/*.js | node_modules\\.bin\\tap-spec",
+<<<<<<< HEAD
     "rmlogs": "node server\\logs\\rmlogs.js"
+=======
+    "rmlogs": "node rmlogs.js" 
+>>>>>>> 57f3436ec802920319e3d4886bbbae98aba5ff85
   },
   "repository": {
     "type": "git",
