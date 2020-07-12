@@ -1,10 +1,21 @@
 const pad = require(`./pad`);
+const padZero = (str) => pad(str, -2, `0`);
 
 class Time {
   constructor(date) {
-    this.date = date;
-    this.slashDate = `${pad(date.getDate(), -2, `0`)}/${pad(date.getMonth() + 1, -2, `0`)}/${date.getFullYear()}`;
-    this.colonTime = `${pad(date.getHours(), -2, `0`)}:${pad(date.getMinutes(), -2, `0`)}:${pad(date.getSeconds(), -2, `0`)}`;
+    this.fullDate = date;
+    this.date = date.getDate();
+    this.month = date.getMonth() + 1; // +1 is necessary to get the right month
+    this.year = date.getFullYear();
+
+    this.hours = date.getHours();
+    this.minutes = date.getMinutes();
+    this.seconds = date.getSeconds();
+
+    this.slashDate = `${padZero(this.date)}/${padZero(this.month)}/${this.year}`;
+    this.dashUSDate = `${this.year}-${this.month}-${this.date}`;
+
+    this.colonTime = `${padZero(this.hours)}:${padZero(this.minutes)}:${padZero(this.seconds)}`;
   }
 
   update(date) {
