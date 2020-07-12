@@ -1,25 +1,16 @@
 /* eslint no-console: 0 */
 
-const fs = require(`fs`);
-const path = require(`path`);
-
 const pad = require(`./helper_functions/pad`);
+const Time = require(`./helper_functions/Time`);
 
 class MiddleWare {
   logger(req, res, next) {
     const reqMethod = pad(req.method, -6, ` `);
     const reqUrl    = `${req.protocol}://${req.get(`host`)}${req.originalUrl}`;
-    const now       = new Date();
-    const date      = `${pad(now.getDate(), -2, `0`)}/${pad(now.getMonth(), -2, `0`)}/${now.getFullYear()}`;
-    const time      = `${pad(now.getHours(), -2, `0`)}:${pad(now.getMinutes(), -2, `0`)}:${pad(now.getSeconds(), -2, `0`)}`;
-    const log       = `${date} ${time} - GOT ${reqMethod}: ${reqUrl}`;
+    const time      = new Time(new Date());
+    const log       = `${time.slashDate} ${time.colonTime} - GOT ${reqMethod}: ${reqUrl}`;
 
     console.log(log);
-    fs.appendFile(path.join(__dirname, `logs`, `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}.log`), `${log}\n`, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
     next();
   }
 }
