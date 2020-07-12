@@ -3,6 +3,9 @@ const padZero = (str) => pad(str, -2, `0`);
 
 class Time {
   constructor(date) {
+    if (!date) { // Assigns date to the present time by default
+      date = new Date(); // eslint-disable-line no-param-reassign
+    }
     this.fullDate = date;
     this.date = date.getDate();
     this.month = date.getMonth() + 1; // +1 is necessary to get the right month
@@ -19,7 +22,12 @@ class Time {
   }
 
   update(date) {
-    this.constructor(date);
+    if (date) {
+      this.constructor(date);
+    }
+    else {
+      this.constructor(new Date());
+    }
   }
 }
 

@@ -7,7 +7,7 @@ class MiddleWare {
   logger(req, res, next) {
     const reqMethod = pad(req.method, -6, ` `);
     const reqUrl    = `${req.protocol}://${req.get(`host`)}${req.originalUrl}`;
-    const time      = new Time(new Date());
+    const time      = new Time();
     const log       = `${time.slashDate} ${time.colonTime} - GOT ${reqMethod}: ${reqUrl}`;
 
     console.log(log);

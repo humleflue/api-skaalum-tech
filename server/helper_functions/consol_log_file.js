@@ -7,7 +7,7 @@ const Time = require(`./Time`);
 
 // Modifies the console, such that it logs into the server/logs dir
 module.exports = () => {
-  const time = new Time(new Date());
+  const time = new Time();
   const logDir = path.join(__dirname, `..`, `logs`);
 
   const logStdout = process.stdout;
