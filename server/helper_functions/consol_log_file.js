@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 
-const fs = require(`fs`);
+const fs   = require(`fs`);
 const path = require(`path`);
 
 const Time = require(`./Time`);
@@ -19,8 +19,10 @@ module.exports = () => {
   };
 
   console.log = (log) => {
-    logFile(`${log}\n`);
-    logStdout.write(`${log}\n`);
+    const time = new Time();
+    const logWithTimeStamp = `${time.slashDate} ${time.colonTime} - ${log}\n`;
+    logFile(logWithTimeStamp);
+    logStdout.write(logWithTimeStamp);
   };
   console.error = console.log;
 };

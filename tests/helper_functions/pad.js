@@ -6,43 +6,57 @@ let actual = true;
 let expected = true;
 
 test(`Test af Pad-funktionen i node/Server`, (assert) => {
-  assert.equal(actual, expected, `Testen skulle gerne være oprettet.`);
+  assert.equal(actual, expected, `The test is created successfully.`);
 
-  actual = pad(`String`, 7, ` `);
-  expected = `String `;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne tilføje 1 space til HØJRE for strengen`);
+  actual = pad(`String`, 7, `-`);
+  expected = `String-`;
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to add 1 dash to the RIGHT of the string`);
 
-  actual = pad(`String`, -7, ` `);
-  expected = ` String`;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne tilføje 1 space til VENSTRE for strengen`);
+  actual = pad(`String`, -7, `-`);
+  expected = `-String`;
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to add 1 dash to the LEFT of the string`);
 
-  actual = pad(`String`, 50, ` `);
-  expected = `String                                            `;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne tilføje 44 spaces til HØJRE for strengen`);
+  actual = pad(`String`, 50, `-`);
+  expected = `String--------------------------------------------`;
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to add 44 dashes to the RIGHT of the string`);
 
-  actual = pad(`String`, -50, ` `);
-  expected = `                                            String`;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne tilføje 44 spaces til VENSTRE for strengen`);
+  actual = pad(`String`, -50, `-`);
+  expected = `--------------------------------------------String`;
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to add 44 dashes to the LEFT of the string`);
 
-  actual = pad(`String`, 6, ` `);
+  actual = pad(`String`, 6, `-`);
   expected = `String`;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne returnere strengen selv`);
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to return the string itself as strIn.length === newStrLen`);
 
-  actual = pad(`String`, -6, ` `);
+  actual = pad(`String`, -6, `-`);
   expected = `String`;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne returnere strengen selv`);
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to return the string itself as strIn.length === newStrLen`);
 
-  actual = pad(`String`, 1, ` `);
+  actual = pad(`String`, 1, `-`);
   expected = `String`;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne returnere strengen selv`);
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to return the string itself as strIn.length > newStrLen`);
 
-  actual = pad(`String`, -1, ` `);
+  actual = pad(`String`, -1, `-`);
   expected = `String`;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne returnere strengen selv`);
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to return the string itself as strIn.length > newStrLen`);
 
-  actual = pad(`String`, 0, ` `);
+  actual = pad(`String`, 0, `-`);
   expected = `String`;
-  assert.equal(actual, expected, `{Forventet: "${expected}" Reel: "${actual}"} funktionen skulle gerne returnere strengen selv`);
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to return the string itself as newStrLen === 0`);
+
+  actual = pad(42, 4, `-`);
+  expected = `42--`;
+  assert.equal(actual, expected, `{Expected: "${expected}" Actual: "${actual}"} `
+                               + `The function should be able to pad non-string-types`);
 
   assert.end();
 });

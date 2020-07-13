@@ -14,6 +14,7 @@ const handleErrors     = require(`./server/error_handler`);
 const mw               = require(`./server/middleware`);
 const consoleLogToFile = require(`./server/helper_functions/consol_log_file`);
 
+// Setup
 consoleLogToFile(); // Modifies the console, such that it logs into the server/logs dir
 const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `server_settings.json`)));
 
@@ -25,6 +26,7 @@ if (settings.debug) {
 }
 app.use(express.static(`public`));
 
+// Routing
 handleRoutes(express, app);
 handleErrors(express, app);
 // Handles non-existing URL-requests. Has to be the last line before app.listen.

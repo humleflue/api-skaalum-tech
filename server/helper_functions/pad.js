@@ -7,7 +7,7 @@
  * Output: Returnere den "paddede" streng
  */
 function pad(strIn, newStrLen, padChar) {
-  const str = `${strIn}`;
+  const str = `${strIn}`; // All input gets converted to string.
   let newStr = ``;
   const paddingLength = Math.abs(newStrLen) - str.length;
   // Error checking
