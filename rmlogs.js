@@ -9,6 +9,7 @@ const logPath = path.join(__dirname, `server`, `logs`);
 console.log(`Removing log files at path: "${logPath}"`);
 rimraf(path.join(logPath, `*.log`), (err) => {
   if (err) {
+    console.error(`An error has occured removing logs. Please try again.`);
     throw err;
   }
   console.log(`Logs removed successfully.`);

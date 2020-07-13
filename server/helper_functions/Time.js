@@ -2,10 +2,7 @@ const pad = require(`./pad`);
 const padZero = (str) => pad(str, -2, `0`);
 
 class Time {
-  constructor(date) {
-    if (!date) { // Assigns date to the present time by default
-      date = new Date(); // eslint-disable-line no-param-reassign
-    }
+  constructor(date = new Date()) { // Assigns date to the present time by default
     this.fullDate = date;
     this.date = date.getDate();
     this.month = date.getMonth() + 1; // +1 is necessary to get the right month
@@ -21,13 +18,8 @@ class Time {
     this.colonTime = `${padZero(this.hours)}:${padZero(this.minutes)}:${padZero(this.seconds)}`;
   }
 
-  update(date) {
-    if (date) {
-      this.constructor(date);
-    }
-    else {
-      this.constructor(new Date());
-    }
+  update(date = new Date()) {
+    this.constructor(date);
   }
 }
 

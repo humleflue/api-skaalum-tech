@@ -8,7 +8,8 @@ const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server_setting
 
 module.exports = (express, app) => {
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    // The RegEx reads everything until the first colon (or whitespace) because SQL-error-messages looks like this: "ERROR_CODE: Bla bla.... "
+    // The RegEx reads everything until the first colon (or whitespace),
+    // because SQL-error-messages looks like this: "ERROR_CODE: Message.... "
     const errorType = err.code || /^[^:^ ]+/.exec(err.message)[0];
 
     if (settings.debug) {
