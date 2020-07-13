@@ -16,7 +16,7 @@ function pad(strIn, newStrLen, padChar) {
   }
   // This means that there's padding which has to be applied
   else {
-    const padding = Array(paddingLength + 1).join(padChar);
+    const padding = Array(paddingLength + 1).join(padChar); // Adding 1 is needed because we're joining empty array spaces
     newStr = newStrLen > 0 ? str + padding : padding + str;
   }
   return newStr;

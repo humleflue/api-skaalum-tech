@@ -5,18 +5,11 @@ const path = require(`path`);
 
 const Time = require(`./Time`);
 
-// Modifies the console, such that it logs into the server/logs dir
+const logDir = path.join(__dirname, `..`, `logs`);
+
+// Modifies the console, such that it logs into the server/logs dir too
 module.exports = () => {
-  const logDir = path.join(__dirname, `..`, `logs`);
   const logStdout = process.stdout;
-  const logFile = (log) => {
-    const time = new Time();
-    fs.appendFile(path.join(logDir, `${time.dashUSDate}.log`), log, (error) => {
-      if (error) {
-        throw error;
-      }
-    });
-  };
 
   console.log = (log) => {
     const time = new Time();
@@ -26,3 +19,12 @@ module.exports = () => {
   };
   console.error = console.log;
 };
+
+function logFile(log) {
+  const time = new Time();
+  fs.appendFile(path.join(logDir, `${time.dashUSDate}.log`), log, (error) => {
+    if (error) {
+      throw error;
+    }
+  });
+}
