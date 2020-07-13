@@ -16,12 +16,13 @@ const consoleLogToFile = require(`./server/helper_functions/consol_log_file`);
 
 // Setup
 consoleLogToFile(); // Modifies the console, such that it logs into the server/logs dir
-const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `server_settings.json`)));
+// express.settings is undefined. So we can define our own settings.
+express.settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `meta`, `server_settings.json`)));
 
 // Middleware
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
-if (settings.debug) {
+if (express.settings.debug) {
   app.use(mw.logger);
 }
 app.use(express.static(`public`));

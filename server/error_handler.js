@@ -1,34 +1,31 @@
 /* eslint no-console: 0 */
 
-const fs = require(`fs`);
-const path = require(`path`);
-
 // const root = path.join(__dirname, `..`);
-const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server_settings.json`)));
 
 module.exports = (express, app) => {
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     // The RegEx reads everything until the first colon (or whitespace),
     // because SQL-error-messages looks like this: "ERROR_CODE: Message.... "
-    const errorType = err.code || /^[^:^ ]+/.exec(err.message)[0];
+    const errType = err.code || /^[^:^ ]+/.exec(err.message)[0];
 
-    if (settings.debug) {
+    if (express.settings.debug) {
       console.error(err);
     }
 
-    const response = {
+    const errRes = {
       message: `500: Internal Server Error.`,
       status: 500,
     };
 
-    switch (errorType) {
+    switch (errType) {
       case `SAMPLE_ERROR`:
-        response.message = `If this message shows, it means that error handling is working correctly.`;
-        response.status = 200;
+        errRes.message = `If this message shows, it means that error handling is working correctly.`;
+        errRes.status = 200;
         break;
-      default: break;
+      default: // Defaults to the errRes object with status code 500
+        break;
     }
 
-    res.status(response.status).json(response);
+    res.status(errRes.status).json(errRes);
   });
 };

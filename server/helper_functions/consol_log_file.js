@@ -22,7 +22,7 @@ module.exports = () => {
 
 function logFile(log) {
   const time = new Time();
-  fs.appendFile(path.join(logDir, `${time.dashUSDate}.log`), log, (error) => {
+  fs.appendFile(path.join(logDir, `${time.dashDateUS}.log`), log, (error) => {
     if (error) {
       throw error;
     }

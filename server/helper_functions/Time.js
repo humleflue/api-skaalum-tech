@@ -16,7 +16,7 @@ class Time {
 
     // Date formatted
     this.slashDate  = `${padZero(this.date)}/${padZero(this.month)}/${this.year}`;
-    this.dashUSDate = `${this.year}-${this.month}-${this.date}`;
+    this.dashDateUS = `${this.year}-${this.month}-${this.date}`;
 
     // Time formatted
     this.colonTime = `${padZero(this.hours)}:${padZero(this.minutes)}:${padZero(this.seconds)}`;
