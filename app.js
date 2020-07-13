@@ -17,10 +17,6 @@ const consoleLogToFile = require(`./server/helper_functions/consol_log_file`);
 // Setup
 consoleLogToFile(); // Modifies the console, such that it logs into the server/logs dir
 const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `meta`, `server_settings.json`)));
-app.use((req, res, next) => {
-  next.settings = settings; // settings are getting saved in the next-object to be available for all middleware
-  next();
-});
 
 // Middleware
 if (settings.log) {

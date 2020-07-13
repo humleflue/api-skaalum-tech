@@ -1,4 +1,8 @@
 /* eslint no-console: 0 */
+const fs = require(`fs`);
+const path = require(`path`);
+
+const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `meta`, `server_settings.json`)));
 
 module.exports = (express, app) => {
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
@@ -6,7 +10,7 @@ module.exports = (express, app) => {
     // because SQL-error-messages looks like this: "ERROR_CODE: Message.... "
     const errType = err.code || /^[^:^ ]+/.exec(err.message)[0];
 
-    if (express.settings.log) {
+    if (settings.log) {
       console.error(err.stack);
     }
 
