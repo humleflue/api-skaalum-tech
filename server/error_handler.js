@@ -15,8 +15,10 @@ module.exports = (express, app) => {
     }
 
     const errRes = {
-      message: `500: Internal Server Error.`,
+      message: `Sorry, something went wrong. Please try again later.\n`
+             + `If the problem persists please contact support with error code 42`,
       status: 500,
+      error: true,
     };
 
     switch (errType) {
