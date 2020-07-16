@@ -17,10 +17,10 @@ const consoleLogToFile = require(`./server/helper_functions/consol_log_file`);
 
 /* Setup */
 consoleLogToFile(); // Modifies the console, such that it logs into the server/logs dir
-const settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `meta`, `server_settings.json`)));
+global.settings = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `meta`, `server_settings.json`)));
 
 /* Middleware */
-if (settings.log) {
+if (global.settings.log) {
   app.use(mw.logger);
 }
 app.use(cors());
