@@ -4,7 +4,7 @@ const pad  = require(`./helper_functions/pad`);
 
 class Middleware {
   logger(req, res, next) {
-    const clientIP  = global.settings.production ? `(${req.headers[`x-real-ip`]})` : ``;
+    const clientIP  = global.settings.production ? `(${pad(req.headers[`x-real-ip`], 15, ` `)})` : ``;
     const reqMethod = pad(req.method, -7, ` `);
     const reqUrl    = `${req.protocol}://${req.get(`host`)}${req.originalUrl}`;
     const log       = `${clientIP} GOT ${reqMethod}: ${reqUrl}`;
