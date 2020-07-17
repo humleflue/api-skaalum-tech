@@ -8,6 +8,7 @@ const bodyParser = require(`body-parser`); // For parsing the request. Makes all
 const fs         = require(`fs`);          // For reading/writing files
 const path       = require(`path`);        // Used to avoid errors when reffering to a path in the file system
 const cors       = require(`cors`);        // Used to enable CORS
+const morgan     = require(`morgan`);
 
 /* Internal modules */
 const handleRoutes     = require(`./server/routing`);
@@ -23,13 +24,13 @@ global.conf = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `meta`, 
 if (global.conf.log) {
   app.use(mw.logger);
 }
-app.use(mw.sendPublicFile);
 app.use(cors({ credentials: true, origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan(`combined`, { stream: mw.getAccessLogStream() })); // setup the logger
 
 /* Routing */
-app.use(express.static(`public`)); // Serves all static files (js, css etc.)
+app.use(express.static(`public`)); // Serves all static files (html, js, css etc.)
 handleRoutes(express, app);
 handleErrors(express, app);
 // Handles non-existing URL-requests. Has to be the last line before app.listen.
