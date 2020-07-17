@@ -13,7 +13,7 @@ module.exports = () => {
 
   console.log = (log) => {
     const time = new Time();
-    const logWithTimeStamp = `${time.slashDate} ${time.colonTime} - ${log}\n`;
+    const logWithTimeStamp = `[${time.slashDate} ${time.colonTime}] ${log}\n`;
     logFile(logWithTimeStamp);
     logStdout.write(logWithTimeStamp);
   };
@@ -22,7 +22,7 @@ module.exports = () => {
 
 function logFile(log) {
   const time = new Time();
-  fs.appendFile(path.join(logDir, `${time.dashDateUS}.log`), log, (error) => {
+  fs.appendFile(path.join(logDir, `${time.dashDateUS}-console.log`), log, (error) => {
     if (error) {
       throw error;
     }
