@@ -6,7 +6,7 @@ class Time {
     // Date
     this.fullDate = date;
     this.date     = date.getDate();
-    this.month    = date.getMonth() + 1; // +1 is necessary to get the right month
+    this.month    = date.getMonth() + 1; // date.getMonth() counts from 0 because JavaScript
     this.year     = date.getFullYear();
 
     // Time

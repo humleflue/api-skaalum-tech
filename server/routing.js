@@ -1,9 +1,5 @@
-const path = require(`path`);
-
 module.exports = (express, app) => {
-  const publicDir = path.join(__dirname, `..`, `public`);
-
-  app.get(`/`, (req, res) => res.sendFile(path.join(publicDir, `index.html`)));
+  app.get(`/`, (req, res) => res.sendPublicFile(`index.html`));
 
   // For testing error handling
   app.get(`/error`, () => {
