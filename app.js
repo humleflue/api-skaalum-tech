@@ -21,6 +21,7 @@ consoleLogToFile(); // Modifies the console, such that it logs into the server/l
 global.conf = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `meta`, `server_settings.json`)));
 
 /* Middleware */
+app.use(mw.requestValidator);
 if (global.conf.log) {
   app.use(mw.logger);
 }

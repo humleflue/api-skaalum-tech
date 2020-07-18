@@ -1,6 +1,10 @@
+const HTTPError = require(`./helper_functions/HTTPError`);
+
 module.exports = (express, app) => {
   // For testing error handling
   app.get(`/error`, () => {
-    throw new Error(`SAMPLE_ERROR: This is an intended error, for when the client is accessing the '/error' URL`);
+    throw new HTTPError(200,
+      `Intended error for testing error-handling`,
+      `If this message shows, it means that error handling is working correctly.`);
   });
 };

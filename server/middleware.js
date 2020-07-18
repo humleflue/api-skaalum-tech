@@ -2,11 +2,31 @@
 
 const path   = require(`path`);
 const fs     = require(`fs`);
+const HTTPError = require(`./helper_functions/HTTPError`);
 
 const pad  = require(`./helper_functions/pad`);
 const Time = require(`./helper_functions/Time`);
 
 class Middleware {
+  // Throws an error if the request isn't valid in some way.
+  requestValidator(req, res, next) {
+    let err;
+
+    if (global.conf.production) {
+      if (req.headers[`x-real-ip`] === undefined) {
+        err = `The request doesn't contain an IP-address`;
+      }
+      // else if {somePossibleError}
+      // else if {somePossibleError}
+      // (...)
+    }
+
+    if (err) {
+      throw new HTTPError(400, err, `Bad request`);
+    }
+    next();
+  }
+
   // Logs all incoming requests in the server log
   logger(req, res, next) {
     const clientIP  = global.conf.production ? `${pad(req.headers[`x-real-ip`], 15, ` `)} | ` : ``;
@@ -18,7 +38,7 @@ class Middleware {
     next();
   }
 
-  // Get's the log-stream for the morgan-modules
+  // Get's the log-stream for the morgan-module
   getAccessLogStream() {
     const time = new Time();
     // create a write stream (in append mode)
