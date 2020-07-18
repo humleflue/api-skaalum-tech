@@ -4,7 +4,7 @@ const HTTPError = require(`./helper_functions/HTTPError`);
 module.exports = (express, app) => {
   // Express will recognize a middleware function with these params, and know it's for error-handling
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    if (global.conf.log) {
+    if (global.conf.log && err.status !== 200) {
       console.error(`Error (${err.status}): ${err.info}\n${err.stack}`);
     }
 
