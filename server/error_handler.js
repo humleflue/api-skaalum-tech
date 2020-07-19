@@ -2,17 +2,21 @@
 const HTTPError = require(`./helper_functions/HTTPError`);
 
 module.exports = (express, app) => {
-  // Express will recognize a middleware function with these params, and know it's for error-handling
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    if (global.conf.log && err.status !== 200) {
-      console.error(`Error (${err.status}): ${err.info}\n${err.stack}`);
+    const expected = err.name === `HTTPError`; // We expect all errors to be thrown with the HTTPError module
+
+    if (global.conf.logErrors) {
+      const log = expected ? `Error (${err.status}): ${err.info}\n${err.stack}` : err.stack;
+      console.error(log);
     }
 
-    // If the HTTPError module weren't used to throw the error we'll generate a generic error response
-    if (err.name !== `HTTPError`) {
+    // If the HTTPError module weren't used to throw the error, it means that something unexpected has happened,
+    // therefore we'll log the error and generate a generic error response to the client
+    // (which is the HTTPError constructor's default)
+    if (!expected) {
       err = new HTTPError(); // eslint-disable-line no-param-reassign
     }
 
-    res.status(err.status).json(err.jsonForUser());
+    res.status(err.status).json(err.getResObj());
   });
 };

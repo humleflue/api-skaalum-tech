@@ -39,11 +39,11 @@ class Middleware {
   }
 
   // Get's the log-stream for the morgan-module
-  getAccessLogStream() {
+  getLogWriteStream() {
     const time = new Time();
     // create a write stream (in append mode)
-    const accessLogStream = fs.createWriteStream(path.join(__dirname, `logs`, `${time.dashDateUS}-full.log`), { flags: `a` });
-    return accessLogStream;
+    const logWriteStream = fs.createWriteStream(path.join(__dirname, `logs`, `${time.dashDateUS}-full.log`), { flags: `a` });
+    return logWriteStream;
   }
 }
 

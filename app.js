@@ -1,14 +1,15 @@
 /* eslint no-console: 0 */
 
 /* External modules */
-const express    = require(`express`);     // For running the server
+const express    = require(`express`);       // For running the server
 const app        = express();
 const port       = 3000;
-const bodyParser = require(`body-parser`); // For parsing the request. Makes all request data available in req.body
-const fs         = require(`fs`);          // For reading/writing files
-const path       = require(`path`);        // Used to avoid errors when reffering to a path in the file system
-const cors       = require(`cors`);        // Used to enable CORS
-const morgan     = require(`morgan`);
+const bodyParser = require(`body-parser`);   // For parsing the request. Makes all request data available in req.body
+const fs         = require(`fs`);            // For reading/writing files
+const path       = require(`path`);          // Used to avoid errors when reffering to a path in the file system
+const cors       = require(`cors`);          // Used to enable CORS
+const morgan     = require(`morgan`);        // Used to log all info about client from the request
+const favicon    = require(`serve-favicon`); // Used to serve the favicon more effectively
 
 /* Internal modules */
 const handleRoutes     = require(`./server/routing`);
@@ -17,21 +18,23 @@ const mw               = require(`./server/middleware`);
 const consoleLogToFile = require(`./server/helper_functions/consol_log_file`);
 
 /* Setup */
-consoleLogToFile(); // Modifies the console, such that it logs into the server/logs dir
+consoleLogToFile(); // Modifies the console, such that it writes logs into the server/logs dir
+// Load settings into grobal variable (available across all scripts)
 global.conf = JSON.parse(fs.readFileSync(path.join(__dirname, `server`, `meta`, `server_settings.json`)));
 
 /* Middleware */
 app.use(mw.requestValidator);
+app.use(favicon(path.join(__dirname, `public`, `favicon.ico`))); // Serves the favicon (and does so that it doesn't get logged)
 if (global.conf.log) {
-  app.use(mw.logger);
+  app.use(mw.logger); // Logs requests to console
 }
-app.use(cors({ credentials: true, origin: true }));
+app.use(morgan(`combined`, { stream: mw.getLogWriteStream() })); // Logs all info about client from the request
+app.use(cors({ credentials: true, origin: true }));              // Enables CORS
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan(`combined`, { stream: mw.getAccessLogStream() })); // setup the logger
 
 /* Routing */
-app.use(express.static(`public`)); // Serves all static files (html, js, css etc.)
+app.use(express.static(path.join(__dirname, `public`))); // Serves all static files (html, js, css etc.)
 handleRoutes(express, app);
 handleErrors(express, app);
 // Handles non-existing URL-requests. Has to be the last line before app.listen.

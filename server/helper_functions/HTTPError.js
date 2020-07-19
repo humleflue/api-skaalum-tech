@@ -7,21 +7,21 @@ class HTTPError extends Error {
    * @info    is the message intended for the developer
    * @message is the message intended for the user
    */
-  constructor(status, info, message) {
+  constructor(status = defaultStatus, info, message = defaultMessage) {
     super(info);
     this.info = info;
 
-    Error.captureStackTrace(this, this.constructor); // Creates log of error stack at HTTPError.stack
+    Error.captureStackTrace(this, this.constructor); // Creates log of error stack at this.stack
 
-    this.name = this.constructor.name;
+    this.name = this.constructor.name; // this.name === "HTTPError"
 
-    this.status     = status || defaultStatus;
+    this.status     = status;
     this.statusCode = this.status; // Just to be nice
 
-    this.message = message || defaultMessage;
+    this.message = message;
   }
 
-  jsonForUser() {
+  getResObj() {
     return {
       status: this.status,
       statusCode: this.statusCode,
