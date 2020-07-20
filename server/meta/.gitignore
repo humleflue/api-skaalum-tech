@@ -1,5 +1,0 @@
-# Ignore everything in this directory
-*
-# Except this file
-!.gitignore
-# server_settings are ignored, so that we can have different config on the server

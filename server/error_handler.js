@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-const HTTPError = require(`./helper_functions/HTTPError`);
+const HTTPError = require(`./helpers/HTTPError`);
 
 module.exports = (express, app) => {
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
@@ -7,6 +7,10 @@ module.exports = (express, app) => {
 
     if (global.conf.logErrors) {
       const log = expected ? `Error (${err.status}): ${err.info}\n${err.stack}` : err.stack;
+      console.error(log);
+    }
+    else if (global.conf.log) { // This logs on one line only
+      const log = expected ? `Error (${err.status}): ${err.info}` : err;
       console.error(log);
     }
 

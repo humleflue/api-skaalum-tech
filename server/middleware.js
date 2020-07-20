@@ -1,11 +1,11 @@
 /* eslint no-console: 0 */
 
-const path   = require(`path`);
-const fs     = require(`fs`);
-const HTTPError = require(`./helper_functions/HTTPError`);
+const path = require(`path`);
+const fs   = require(`fs`);
 
-const pad  = require(`./helper_functions/pad`);
-const Time = require(`./helper_functions/Time`);
+const HTTPError = require(`./helpers/HTTPError`);
+const pad       = require(`./helpers/pad`);
+const Time      = require(`./helpers/Time`);
 
 class Middleware {
   // Throws an error if the request isn't valid in some way.
