@@ -27,13 +27,13 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "rimraf": "^3.0.2",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "ssh2": "^0.8.9"
   },
   "devDependencies": {
     "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "ssh2": "^0.8.9",
     "tap-spec": "^5.0.0",
     "tape": "^5.0.1",
     "tape-promise": "^4.0.0"
