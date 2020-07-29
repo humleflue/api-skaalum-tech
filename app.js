@@ -5,17 +5,17 @@ const express    = require(`express`);       // For running the server
 const app        = express();                // For running the server
 const port       = 3001;                     // Server port number
 const bodyParser = require(`body-parser`);   // For parsing the request. Makes all request data available in req.body
-const fs         = require(`fs`);            // For reading/writing files
 const path       = require(`path`);          // Used to avoid errors when reffering to a path in the file system
 const cors       = require(`cors`);          // Used to enable CORS
 const morgan     = require(`morgan`);        // Used to log all info about client from the request
 const favicon    = require(`serve-favicon`); // Used to serve the favicon more effectively (no need to put it in the html)
+require(`express-async-errors`);             // Handles async errors
 
 /* Internal modules */
-const handleRoutes     = require(`./server/routing`);
-const handleErrors     = require(`./server/error_handler`);
-const mw               = require(`./server/middleware`);
-const consoleLogToFile = require(`./server/helpers/consol_log_file`);
+const handleRoutes         = require(`./server/routing`);
+const handleErrors         = require(`./server/error_handler`);
+const mw                   = require(`./server/middleware`);
+const consoleLogToFile     = require(`./server/helpers/consol_log_file`);
 
 /* Setup */
 global.conf = require(`./server_settings`); // Load settings into grobal variable (available across all scripts)

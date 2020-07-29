@@ -9,7 +9,7 @@ module.exports = (express, app) => {
 
   app.get(`/`, (req, res) => res.json({ status: `API is up and running!` }));
 
-  app.get(`/biler`, (req, res) => res.json(biler.get()));
+  app.get(`/biler`, (req, res) => biler.get(req, res));
 
   // For testing error handling
   const errorDir = path.join(publicDir, `error`);
