@@ -19,11 +19,13 @@ const consoleLogToFile = require(`./server/helpers/consol_log_file`);
 
 /* Setup */
 consoleLogToFile(); // Modifies the console, such that it writes logs into the server/logs dir
-global.conf = JSON.parse(fs.readFileSync(path.join(__dirname, `server_settings.json`))); // Load settings into grobal variable (available across all scripts)
+// Load settings into grobal variable (available across all scripts)
+global.conf = JSON.parse(fs.readFileSync(path.join(__dirname, `server_settings.json`)));
 
 /* Middleware */
 app.use(mw.requestValidator);
-app.use(favicon(path.join(__dirname, `public`, `favicon.ico`))); // Serves the favicon and does so that it doesn't get logged (no need to put it in the html)
+// Serves the favicon and does so that it doesn't get logged (no need to serve favicon through the html)
+app.use(favicon(path.join(__dirname, `public`, `favicon.ico`)));
 if (global.conf.log) {
   app.use(mw.logger); // Logs requests to console
 }

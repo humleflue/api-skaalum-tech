@@ -4,12 +4,11 @@ const HTTPError = require(`./helpers/HTTPError`);
 module.exports = (express, app) => {
   app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     const expected = err.name === `HTTPError`; // We expect all errors to be thrown with the HTTPError module
-
-    if (global.conf.logErrors) {
+    if (global.conf.logErrors) { // Logs all info about the error
       const log = expected ? `Error (${err.status}): ${err.info}\n${err.stack}` : err.stack;
       console.error(log);
     }
-    else if (global.conf.log) { // This logs on one line only
+    else if (global.conf.log) { // Logs on one line only
       const log = expected ? `Error (${err.status}): ${err.info}` : err;
       console.error(log);
     }
