@@ -3,7 +3,7 @@
 /* External modules */
 const express    = require(`express`);       // For running the server
 const app        = express();                // For running the server
-const port       = 3000;                     // Server port number
+const port       = 3001;                     // Server port number
 const bodyParser = require(`body-parser`);   // For parsing the request. Makes all request data available in req.body
 const fs         = require(`fs`);            // For reading/writing files
 const path       = require(`path`);          // Used to avoid errors when reffering to a path in the file system
@@ -18,9 +18,8 @@ const mw               = require(`./server/middleware`);
 const consoleLogToFile = require(`./server/helpers/consol_log_file`);
 
 /* Setup */
+global.conf = require(`./server_settings`); // Load settings into grobal variable (available across all scripts)
 consoleLogToFile(); // Modifies the console, such that it writes logs into the server/logs dir
-// Load settings into grobal variable (available across all scripts)
-global.conf = JSON.parse(fs.readFileSync(path.join(__dirname, `server_settings.json`)));
 
 /* Middleware */
 app.use(mw.requestValidator);
@@ -35,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /* Routing */
-app.use(express.static(path.join(__dirname, `public`), { index: false })); // Serves all static files (js, css etc.)
+// app.use(express.static(path.join(__dirname, `public`), { index: false })); // Serves all static files (js, css etc.)
 handleRoutes(express, app);
 handleErrors(express, app);
 app.use((req, res) => res.sendStatus(404)); // Handles non-existing URL-requests. Has to be the last line before app.listen.

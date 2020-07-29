@@ -99,7 +99,6 @@ Thumbs.db
 *.der
 *.key
 *.pem
-server_settings.json
 
 # -------------------------
 # BEGIN Whitelisted Files

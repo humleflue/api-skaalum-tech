@@ -2,10 +2,14 @@ const path = require(`path`);
 
 const HTTPError = require(`./helpers/HTTPError`);
 
+const biler = require(`./models/biler`);
+
 module.exports = (express, app) => {
   const publicDir = path.join(__dirname, `..`, `public`);
 
-  app.get(`/`, (req, res) => res.sendFile(path.join(publicDir, `index.html`)));
+  app.get(`/`, (req, res) => res.json({ status: `API is up and running!` }));
+
+  app.get(`/biler`, (req, res) => res.json(biler.get()));
 
   // For testing error handling
   const errorDir = path.join(publicDir, `error`);
