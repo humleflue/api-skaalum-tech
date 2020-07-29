@@ -9,7 +9,7 @@ const path       = require(`path`);          // Used to avoid errors when reffer
 const cors       = require(`cors`);          // Used to enable CORS
 const morgan     = require(`morgan`);        // Used to log all info about client from the request
 const favicon    = require(`serve-favicon`); // Used to serve the favicon more effectively (no need to put it in the html)
-require(`express-async-errors`);             // Handles async errors
+require(`express-async-errors`);             // With this we don't have to pass errors like next(err) but can just throw'em instead
 
 /* Internal modules */
 const handleRoutes         = require(`./server/routing`);
@@ -25,9 +25,9 @@ consoleLogToFile(); // Modifies the console, such that it writes logs into the s
 app.use(mw.requestValidator);
 // Serves the favicon and does so that it doesn't get logged (no need to serve favicon through the html)
 app.use(favicon(path.join(__dirname, `public`, `favicon.ico`)));
-// if (global.conf.log) {
-app.use(mw.logger); // Logs requests to console
-// }
+if (global.conf.log) {
+  app.use(mw.logger); // Logs requests to console
+}
 app.use(morgan(`combined`, { stream: mw.getLogWriteStream() })); // Logs all info about client from the request
 app.use(cors({ credentials: true, origin: true }));              // Enables CORS
 app.use(bodyParser.json());

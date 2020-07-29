@@ -1,11 +1,13 @@
-const query = require(`./mysqlConnector`);
-// const HTTPError = require(`../helpers/HTTPError`);
+const Database = require(`./abstract_models/mysqlConnector`);
 
-// const settings = require(`../../server_settings`); // FIXME: global.conf is undefined
+class Biler extends Database {
+  constructor() {
+    super();
+    this.table = `biler`;
+  }
 
-class Biler {
   async get(req, res) {
-    const bil = await query(`SELECT * FROM biler`);
+    const bil = await this.query(`SELECT * FROM ${this.table}`);
     res.json(bil);
   }
 }
