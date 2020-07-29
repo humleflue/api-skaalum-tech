@@ -25,9 +25,9 @@ consoleLogToFile(); // Modifies the console, such that it writes logs into the s
 app.use(mw.requestValidator);
 // Serves the favicon and does so that it doesn't get logged (no need to serve favicon through the html)
 app.use(favicon(path.join(__dirname, `public`, `favicon.ico`)));
-if (global.conf.log) {
-  app.use(mw.logger); // Logs requests to console
-}
+// if (global.conf.log) {
+app.use(mw.logger); // Logs requests to console
+// }
 app.use(morgan(`combined`, { stream: mw.getLogWriteStream() })); // Logs all info about client from the request
 app.use(cors({ credentials: true, origin: true }));              // Enables CORS
 app.use(bodyParser.json());
