@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Skaalum | Getting Over It</title>
+		<meta charset="utf-8">
+		<meta name="author" content="Lasse D. Skaalum">
+		<meta name="description" content="Who's gonna be the champion of Getting Over It!?">
+		<script defer src="static/js/getting_over_it_form.js"></script>
+		<script defer src="static/js/getting_over_it_onload.js"></script>
+	</head>
+	<body>
+        <h1>Getting Over It</h1>
+		<h2>With Bennett Foddy</h2>
+		<button id="showNewSpeedrunForm">Submit new speedrun</button>
+		<form id="newSpeedrunForm" onsubmit="return false" method="post">
+			<fieldset>
+			  	<legend>Submit new speedrun:</legend>
+			  	<label for="player">Player</label><br>
+				<input type="text" name="player" id="player" placeholder="Player/username" required minlength="1" maxlength="30">
+				<br><br>
+				
+				<label for="hours">In-game time</label><br>
+				<input type="number" name="hours" id="hours" placeholder="1">
+			  	<input type="number" name="minutes" id="minutes" placeholder="30" min="0" max="59" required>
+				<input type="number" name="seconds" id="seconds" placeholder="10" min="0" max="59" required>
+				<input type="number" name="milliseconds" id="milliseconds" placeholder="789" min="0" max="999" required>
+				<br><br>
+				
+				<label for="date">Date finished</label><br>
+				<input type="datetime-local" type="date" name="date" id="date">
+				<br><br>
+
+			  	<input type="submit" id="submitSpeedrun" value="Submit new speedrun">
+			</fieldset>
+		</form>
+		<table>
+			<tr>
+				<th>Rank</th>
+				<th>Player</th>
+				<th>In-game time</th>
+				<th>Date</th>
+				<th colspan="2">Proof</th>
+			</tr>
+		</table>
+	</body>
+</html>
