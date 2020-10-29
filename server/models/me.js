@@ -1,7 +1,10 @@
 const moment = require(`moment`);
 
+const birthday = moment(`06-09-1996`, `DD-MM-YYYY`);
 const info = {
-  birthday: moment(`1996-06-09`),
+  birthdayISO8601: birthday.format(),
+  brithdayFormatted: birthday.format(`dddd, MMMM Do YYYY`),
+  age: moment().diff(birthday, `years`),
   firstName: `Lasse`,
   lastName: `Skaalum`,
 };
