@@ -19,12 +19,12 @@ const city = `Aalborg`;
 
 class Badges {
   name(req, res) {
-    const badge = new Shield(`name`, fullName, `green`);
+    const badge = new Shield(`name`, fullName, `orange`);
     res.json(badge);
   }
 
   age(req, res) {
-    const badge = new Shield(`age`, moment().diff(birthday, `years`), `green`);
+    const badge = new Shield(`age`, moment().diff(birthday, `years`), `orange`);
     res.json(badge);
   }
 
