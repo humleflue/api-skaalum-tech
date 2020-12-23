@@ -3,6 +3,7 @@ const moment = require(`moment`);
 const Shield = require(`./shield`);
 
 const birthday = moment(`06-09-1996`, `DD-MM-YYYY`);
+const age      = moment().diff(birthday, `years`);
 
 const firstName = `Lasse`;
 const middleName = `Damsgaard`;
@@ -24,7 +25,7 @@ class Badges {
   }
 
   age(req, res) {
-    const badge = new Shield(`age`, moment().diff(birthday, `years`), `orange`);
+    const badge = new Shield(`age`, age, `orange`);
     res.json(badge);
   }
 
