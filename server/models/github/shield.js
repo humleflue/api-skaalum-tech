@@ -3,18 +3,18 @@ class Shield {
     logoSvg, logoColor, logoWidth, logoPosition, style, cacheSeconds) {
     this.schemaVersion = 1;
 
-    this.label = label;
-    this.message = message;
-    this.color = color;
-    this.labelColor = labelColor;
-    this.isError = isError;
-    this.namedLogo = namedLogo;
-    this.logoSvg = logoSvg;
-    this.logoColor = logoColor;
-    this.logoWidth = logoWidth;
-    this.logoPosition = logoPosition;
-    this.style = style;
-    this.cacheSeconds = cacheSeconds;
+    this.label = `${label}`;
+    this.message = `${message}`;
+    this.color = color ? `${color}` : undefined;
+    this.labelColor = labelColor ? `${labelColor}` : undefined;
+    this.isError = isError ? `${isError}` : undefined;
+    this.namedLogo = namedLogo ? `${namedLogo}` : undefined;
+    this.logoSvg = logoSvg ? `${logoSvg}` : undefined;
+    this.logoColor = logoColor ? `${logoColor}` : undefined;
+    this.logoWidth = logoWidth ? `${logoWidth}` : undefined;
+    this.logoPosition = logoPosition ? `${logoPosition}` : undefined;
+    this.style = style ? `${style}` : undefined;
+    this.cacheSeconds = cacheSeconds ? `${cacheSeconds}` : undefined;
   }
 }
 
