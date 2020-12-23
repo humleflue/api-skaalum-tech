@@ -2,6 +2,8 @@ class Shield {
   constructor(label, message, color, labelColor, isError, namedLogo,
     logoSvg, logoColor, logoWidth, logoPosition, style, cacheSeconds) {
     this.schemaVersion = 1;
+    // this.style = style ? `${style}` : undefined;
+    this.style = `for-the-badge`;
 
     this.label = `${label}`;
     this.message = `${message}`;
@@ -13,7 +15,6 @@ class Shield {
     this.logoColor = logoColor ? `${logoColor}` : undefined;
     this.logoWidth = logoWidth ? `${logoWidth}` : undefined;
     this.logoPosition = logoPosition ? `${logoPosition}` : undefined;
-    this.style = style ? `${style}` : undefined;
     this.cacheSeconds = cacheSeconds ? `${cacheSeconds}` : undefined;
   }
 }
