@@ -1,6 +1,6 @@
 const moment = require(`moment`);
 
-const Shield = require(`./badge`);
+const Shield = require(`./shield`);
 
 const birthday = moment(`06-09-1996`, `DD-MM-YYYY`);
 
