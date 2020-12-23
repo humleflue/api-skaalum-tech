@@ -5,6 +5,11 @@ const firstName = `Lasse`;
 const middleName = `Damsgaard`;
 const lastName = `Skaalum`;
 
+const occupation = {
+  name: `Software Engineering Student`,
+  place: `Aalborg University`,
+};
+
 const info = {
   // birthdayISO8601: birthday.format(),
   // brithdayFormatted: birthday.format(`dddd, MMMM Do YYYY`),
@@ -15,8 +20,7 @@ const info = {
   fullName: `${firstName} ${middleName} ${lastName}`,
   country: `Denmark`,
   city: `Aalborg`,
-  occupation: `Software Engineering Student`,
-  placeOfOccupation: `Aalborg University`,
+  occupation,
 };
 
 class Me {
