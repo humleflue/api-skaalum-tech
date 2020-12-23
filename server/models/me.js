@@ -1,6 +1,7 @@
 const moment = require(`moment`);
 
 const birthday = moment(`06-09-1996`, `DD-MM-YYYY`);
+
 const firstName = `Lasse`;
 const middleName = `Damsgaard`;
 const lastName = `Skaalum`;
