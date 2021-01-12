@@ -25,7 +25,7 @@ class Badges {
   }
 
   age(req, res) {
-    const badge = new Shield(`age`, age, `orange`);
+    const badge = new Shield(`age`, `${age}`, `orange`);
     res.json(badge);
   }
 
